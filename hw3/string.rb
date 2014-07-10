@@ -1,0 +1,38 @@
+=begin
+Расширить класс String следующими методами:
+
+1. palindrome?
+  проверяет, является ли заданная строка палиндромом
+2. anagram?(other_str)
+  проверяет, является ли заданная строка анаграммой к другой строке(other_str)
+=end
+
+#используем unicode для корректного перевода кирилицы в downcase
+#require "unicode"
+
+require 'benchmark'
+
+class String
+
+  #переопределяем метод downcase для строки. теперь при вызове 'Привет'.downcase
+  #будет вызываться переопределенный метод
+  #def downcase
+  #  Unicode::downcase(self)
+  #end
+ #TODO методы для палиндрома и анаграммы должны быть тут
+  def palindrome?
+    100000.times { self == self.reverse }
+  end
+  def palindrome2?
+    100000.times { end_with? self[0..size/2].reverse }
+  end
+end
+
+#gues which method is faster?
+
+text = "skdjfhaksjhfklasdhfsdmfnsfslfskfajslfjasl;fjas;lfjasklfjaslfskflskfal;sfjasfjkdsjfhskjfhdjghdkgdjfhgjdfskdjfhaksjhfklasdhfsdmfnsfslfskfajslfjasl;fjas;lfjasklfjaslfskflskfal;sfjasfjkdsjfhskjfhdjghdkgdjfhgjdfskdjfhaksjhfklasdhfsdmfnsfslfskfajslfjasl;fjas;lfjasklfjaslfskflskfal;sfjasfjkdsjfhskjfhdjghdkgdjfhgjdfskdjfhaksjhfklasdhfsdmfnsfslfskfajslfjasl;fjas;lfjasklfjaslfskflskfal;sfjasfjkdsjfhskjfhdjghdkgdjfhgjdfskdjfhaksjhfklasdhfsdmfnsfslfskfajslfjasl;fjas;lfjasklfjaslfskflskfal;sfjasfjkdsjfhskjfhdjghdkgdjfhgjdfskdjfhaksjhfklasdhfsdmfnsfslfskfajslfjasl;fjas;lfjasklfjaslfskflskfal;sfjasfjkdsjfhskjfhdjghdkgdjfhgjdfskdjfhaksjhfklasdhfsdmfnsfslfskfajslfjasl;fjas;lfjasklfjaslfskflskfal;sfjasfjkdsjfhskjfhdjghdkgdjfhgjdfskdjfhaksjhfklasdhfsdmfnsfslfskfajslfjasl;fjas;lfjasklfjaslfskflskfal;sfjasfjkdsjfhskjfhdjghdkgdjfhgjdfskdjfhaksjhfklasdhfsdmfnsfslfskfajslfjasl;fjas;lfjasklfjaslfskflskfal;sfjasfjkdsjfhskjfhdjghdkgdjfhgjdfskdjfhaksjhfklasdhfsdmfnsfslfskfajslfjasl;fjas;lfjasklfjaslfskflskfal;sfjasfjkdsjfhskjfhdjghdkgdjfhgjdfskdjfhaksjhfklasdhfsdmfnsfslfskfajslfjasl;fjas;lfjasklfjaslfskflskfal;sfjasfjkdsjfhskjfhdjghdkgdjfhgjdfskdjfhaksjhfklasdhfsdmfnsfslfskfajslfjasl;fjas;lfjasklfjaslfskflskfal;sfjasfjkdsjfhskjfhdjghdkgdjfhgjdfskdjfhaksjhfklasdhfsdmfnsfslfskfajslfjasl;fjas;lfjasklfjaslfskflskfal;sfjasfjkdsjfhskjfhdjghdkgdjfhgjdfskdjfhaksjhfklasdhfsdmfnsfslfskfajslfjasl;fjas;lfjasklfjaslfskflskfal;sfjasfjkdsjfhskjfhdjghdkgdjfhgjdfskdjfhaksjhfklasdhfsdmfnsfslfskfajslfjasl;fjas;lfjasklfjaslfskflskfal;sfjasfjkdsjfhskjfhdjghdkgdjfhgjdfskdjfhaksjhfklasdhfsdmfnsfslfskfajslfjasl;fjas;lfjasklfjaslfskflskfal;sfjasfjkdsjfhskjfhdjghdkgdjfhgjdfskdjfhaksjhfklasdhfsdmfnsfslfskfajslfjasl;fjas;lfjasklfjaslfskflskfal;sfjasfjkdsjfhskjfhdjghdkgdjfhgjdfskdjfhaksjhfklasdhfsdmfnsfslfskfajslfjasl;fjas;lfjasklfjaslfskflskfal;sfjasfjkdsjfhskjfhdjghdkgdjfhgjdfskdjfhaksjhfklasdhfsdmfnsfslfskfajslfjasl;fjas;lfjasklfjaslfskflskfal;sfjasfjkdsjfhskjfhdjghdkgdjfhgjdfalsfhasklbsaknvbadsjcbsaohodiawhscnskjvbkhajsbclNZVlksbdvjbKLHvbSKJLDvbKJSnclADhcKLJSbckjnkJBcdsbKSJb ISLvbsKjcbSLkcBlfSHfklhdflhfkLJZ"
+Benchmark.bm do |x|
+  x.report { text.palindrome? }
+  x.report { text.palindrome2? }
+end
+
